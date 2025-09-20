@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.Input;
+using CryptoCurrencies.Common.Services;
 using DevExpress.Mvvm;
 using System;
 using System.Collections.Generic;
@@ -20,14 +21,13 @@ namespace CryptoCurrencies.Common.ViewModel
     public abstract class BaseViewModel : ViewModelBase
     {
         public Dispatcher Dispatcher { get; private set; }
-        public AsyncRelayCommand LoadedCommand { get; set; }
+        public TabNavigationService TabNavigationService { get; set; } = null!;
         protected BaseViewModel()
         {
-            LoadedCommand = new AsyncRelayCommand(ViewLoadedAsync);
             Dispatcher = Dispatcher.CurrentDispatcher;
         }
         public object Model { get => GetValue<object>(); set => SetValue(value); }
-        protected virtual Task ViewLoadedAsync()
+        internal protected virtual Task ViewLoadedAsync()
         {
             return Task.CompletedTask;
         }

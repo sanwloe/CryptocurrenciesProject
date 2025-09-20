@@ -23,8 +23,13 @@ namespace Mapper
         public MapperProfile()
         {
             CreateMap<decimal,decimal>().ReverseMap().ConvertUsing(v => NormalizeDecimal(v));
+            CreateMap<string, int>().ConvertUsing(v => Convert.ToInt32(v));
             CreateMap<BinanceFuturesTicker, SymbolData>();
+            CreateMap<CoinCapSymbolData, SymbolData>();
         }
-        private Func<decimal, decimal> NormalizeDecimal => value => value / 1.000000000000000000000000m;
+        private decimal NormalizeDecimal(decimal value)
+        {
+            return value / 1.000000000000000000000000m;
+        }
     }
 }

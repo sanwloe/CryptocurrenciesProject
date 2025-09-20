@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +17,8 @@ namespace CryptoCurrencies.Common.Extensions.XAML
         {
             if (ServiceProvider == null) 
             {
+                // Design time , інакше можливо контроли не будуть відображатись під час дизайну
+                return Activator.CreateInstance(Type) ?? new object();
                 throw new NullReferenceException($"{nameof(ServiceProvider)} is null.");
             }
             if (Type == null) 

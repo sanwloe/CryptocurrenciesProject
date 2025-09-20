@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BinanceProvider;
+using CoinCapProvider.RestApi;
 using CoinMarketCapProvider;
 using DataModels.Enums;
 using ProviderAbstract.Interface;
+
 
 namespace ProvidersFactory
 {
@@ -16,7 +18,8 @@ namespace ProvidersFactory
         {
             return type switch
             {
-                ExchangeType.CoinMarketCap => new CoinMarketCapRestClient(),
+                //ExchangeType.CoinMarketCap => new CoinMarketCapRestClient(),
+                ExchangeType.CoinCap => new CoinCapRestClient(),
                 ExchangeType.BinanceFutures => new BinanceFuturesRestClient(),
                 _ => throw new Exception()
             };

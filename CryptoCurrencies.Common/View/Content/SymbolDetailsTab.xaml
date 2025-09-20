@@ -1,0 +1,51 @@
+﻿<local:ContentControlBase
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CryptoCurrencies.Common.View.Content"
+             xmlns:xamlExt="clr-namespace:CryptoCurrencies.Common.Extensions.XAML"
+             xmlns:viewmodels="clr-namespace:CryptoCurrencies.Common.ViewModel"
+             xmlns:modeldata="clr-namespace:CryptoCurrencies.Common.Model"
+             xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors" x:TypeArguments="modeldata:SymbolDetailsModel" xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts" x:Class="CryptoCurrencies.Common.View.Content.SymbolDetailsTab"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             >
+
+    <local:ContentControlBase.Resources>
+        <xamlExt:DISource Type="{x:Type viewmodels:SymbolDetailsViewModel}" x:Key="vm"/>
+    </local:ContentControlBase.Resources>
+    <local:ContentControlBase.DataContext>
+        <Binding Source="{StaticResource vm}"/>
+    </local:ContentControlBase.DataContext>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+
+            
+
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <dxg:GridControl x:Name="gridControlMarkets" ItemsSource="{Binding Model.Markets}">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="PreviewMouseDoubleClick">
+                        <i:InvokeCommandAction Command="{Binding OpenExchangeCommand}" CommandParameter="{Binding SelectedItem, ElementName=gridControlMarkets}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                <dxg:GridControl.View>
+                    <dxg:TableView ShowVerticalLines="False" EnableSelectedRowAppearance="False"/>
+                </dxg:GridControl.View>
+                <dxg:GridColumn Header="Exchange" FieldName="MarketName"/>
+                <dxg:GridColumn Width="auto" Header="Price (USD)" FieldName="Price"/>
+                <dxg:GridColumn Width="*" Header="Currency" FieldName="PriceCurrency"/>
+            </dxg:GridControl>
+        </Grid>
+    </Grid>
+</local:ContentControlBase>

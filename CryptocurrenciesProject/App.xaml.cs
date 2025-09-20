@@ -1,4 +1,5 @@
-﻿using System.Configuration;
+﻿using DevExpress.Xpf.Core.Native;
+using System.Configuration;
 using System.Data;
 using System.Windows;
 
@@ -18,8 +19,10 @@ namespace CryptocurrenciesProject
             });
 
             base.OnStartup(e);
-            MainWindow = new MainWindow();
+            var mainWindow = new MainWindow();
+            MainWindow = mainWindow;
             MainWindow.Show();
+            
         }
     }
 }
