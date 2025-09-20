@@ -7,9 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BinanceProvider\BinanceProvider.csproj" />
-    <ProjectReference Include="..\CoinCapProvider\CoinCapProvider.csproj" />
-    <ProjectReference Include="..\CoinMarketCapProvider\CoinMarketCapProvider.csproj" />
+    <ProjectReference Include="..\Mapper\Mapper.csproj" />
     <ProjectReference Include="..\ProviderAbstract\ProviderAbstract.csproj" />
   </ItemGroup>
 

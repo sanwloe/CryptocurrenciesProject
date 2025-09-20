@@ -9,9 +9,9 @@ using DataModels.Models;
 
 namespace CryptoCurrencies.Common.Model
 {
-    public class MainPageModel : BindableBase
+    public class DashboardTabModel : DataModelBase
     {
-        public MainPageModel()
+        public DashboardTabModel()
         {
             Symbols = [];
         }

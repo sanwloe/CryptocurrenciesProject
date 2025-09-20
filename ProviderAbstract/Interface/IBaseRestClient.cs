@@ -11,5 +11,6 @@ namespace ProviderAbstract.Interface
     public interface IBaseRestClient
     {
         Task<RequestResult<IEnumerable<SymbolData>>> GetSymbols();
+        Task<RequestResult<IEnumerable<MarketData>>> GetMarketsBySymbol(string symbol);
     }
 }

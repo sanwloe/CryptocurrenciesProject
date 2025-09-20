@@ -15,16 +15,17 @@ namespace ProviderAbstract.Helpers
         public static async Task<RequestResult<T>> GetResultFromResponse<T>(HttpResponseMessage response)
         {
             var isSuccess = response.IsSuccessStatusCode;
-            var content = await response.Content.ReadAsStringAsync();
+            var content = await GetData(response);
             var hasContent = content != null;
 
             if (isSuccess && hasContent)
             {
                 var data = JsonConvert.DeserializeObject<T>(content!,new JsonSerializerSettings()
                 {
-                    
+                    DefaultValueHandling = DefaultValueHandling.Populate,
+                    NullValueHandling = NullValueHandling.Include
                 });
-                return new RequestResult<T>() { Result = data };
+                return new RequestResult<T>() { Result = data! };
             }
             else
             {
@@ -39,6 +40,29 @@ namespace ProviderAbstract.Helpers
                 Exception = obj.Exception,
                 Result = data
             };
+        }
+        public static string GetEndPointWithParameters(string endPoint,Dictionary<string,string> parameters)
+        {
+            StringBuilder sb = new StringBuilder(endPoint);
+            foreach (var item in parameters)
+            {
+                sb = sb.Replace("{" + $"{item.Key}" + "}",item.Value);
+            }
+            return sb.ToString();
+        }
+        private static async Task<string> GetData(HttpResponseMessage response)
+        {
+            var content = await response.Content.ReadAsStringAsync();
+            JToken jToken = JObject.Parse(content);
+            var dataToken = jToken.SelectToken("data");
+            if(dataToken == null )
+            {
+                return content;
+            }
+            else
+            {
+                return dataToken.ToString();
+            }
         }
     }
 }

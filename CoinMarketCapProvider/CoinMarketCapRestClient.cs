@@ -31,5 +31,10 @@ namespace CoinMarketCapProvider
             var result = await RequestHelper.GetResultFromResponse<IEnumerable<SymbolData>>(response);
             return result;
         }
+
+        public Task<RequestResult<IEnumerable<MarketData>>> GetMarketsBySymbol(string symbol)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -4,13 +4,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CryptocurrenciesProject"
-        xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid" 
+        xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:xamlExt="clr-namespace:CryptoCurrencies.Common.Extensions.XAML;assembly=CryptoCurrencies.Common" 
+        xmlns:content="clr-namespace:CryptoCurrencies.Common.View.Content;assembly=CryptoCurrencies.Common"
+        xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core" 
         x:Class="CryptocurrenciesProject.MainWindow"
         mc:Ignorable="d"
         Title="Cryptocurrencies" Height="450" Width="800"
-        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-        xmlns:xamlExt="clr-namespace:CryptoCurrencies.Common.Extensions.XAML;assembly=CryptoCurrencies.Common" 
-        xmlns:pages="clr-namespace:CryptoCurrencies.Common.View.Pages;assembly=CryptoCurrencies.Common">
+        x:Name="window">
 
 
     <Window.Resources>
@@ -21,11 +23,10 @@
     </Window.DataContext>
     
     <Grid>
-        <Frame x:Name="mainFrame" Style="{DynamicResource mainFrameStyle}">
-            <Frame.Content>
-                <pages:MainPage/>
-            </Frame.Content>
-        </Frame>
+        <dx:DXTabControl x:Name="MainTabControl" Padding="0">
+            <dx:DXTabItem AllowHide="False" Header="Dashboard">
+                <content:DashboardTab DXTabOwner="{Binding ElementName=MainTabControl}"/>
+            </dx:DXTabItem>
+        </dx:DXTabControl>
     </Grid>
-
 </Window>
