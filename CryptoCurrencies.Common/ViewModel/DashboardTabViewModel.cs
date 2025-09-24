@@ -1,14 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using CryptoCurrencies.Common.Model;
 using CryptoCurrencies.Common.View.Content;
-using DevExpress.Mvvm.POCO;
 using ProvidersFactory;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CryptoCurrencies.Common.ViewModel
 {

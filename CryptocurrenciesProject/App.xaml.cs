@@ -1,7 +1,4 @@
-﻿using DevExpress.Xpf.Core.Native;
-using System.Configuration;
-using System.Data;
-using System.Windows;
+﻿using System.Windows;
 
 namespace CryptocurrenciesProject
 {

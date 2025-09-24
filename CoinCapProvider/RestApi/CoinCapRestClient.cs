@@ -32,7 +32,7 @@ namespace CoinCapProvider.RestApi
         {
             var response = await _httpClient.GetAsync(SymbolsEndPoint);
             var data = await RequestHelper.GetResultFromResponse<IEnumerable<CoinCapSymbolData>>(response);
-            var mapper = MapperHelper.GetMapper<CoinCapMapperProfile>(DataModels.Enums.ExchangeType.CoinCap);
+            var mapper = MapperHelper.GetMapper<CoinCapMapperProfile>();
             var result = mapper.Map<IEnumerable<SymbolData>>(data.Result);
             var clone = RequestHelper.CloneWithNewResult(data, result);
             if(clone.IsSuccess)

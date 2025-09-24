@@ -1,11 +1,5 @@
-﻿using DevExpress.Mvvm;
-using System;
-using System.Collections.Generic;
+﻿using DataModels.Models;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DataModels.Models;
 
 namespace CryptoCurrencies.Common.Model
 {

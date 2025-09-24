@@ -28,7 +28,7 @@ namespace BinanceProvider.RestApi
         {
             var response = await _httpClient.GetAsync(SymbolsEndPoint);
             var data = await RequestHelper.GetResultFromResponse<IEnumerable<BinanceFuturesTicker>>(response);
-            var mapper = MapperHelper.GetMapper<BinanceFuturesMapperProfile>(DataModels.Enums.ExchangeType.BinanceFutures);
+            var mapper = MapperHelper.GetMapper<BinanceFuturesMapperProfile>();
             var mapData = mapper.Map<IEnumerable<SymbolData>>(data.Result);
             var result = RequestHelper.CloneWithNewResult(data, mapData);
             if (result.IsSuccess) 
@@ -59,7 +59,7 @@ namespace BinanceProvider.RestApi
                 });
             var response = await _httpClient.GetAsync(endPoint);
             var data = await RequestHelper.GetResultFromResponse<IEnumerable<BinanceFuturesCandleStickData>>(response);
-            var mapper = MapperHelper.GetMapper<BinanceFuturesMapperProfile>(DataModels.Enums.ExchangeType.BinanceFutures);
+            var mapper = MapperHelper.GetMapper<BinanceFuturesMapperProfile>();
             var mapData = mapper.Map<IEnumerable<CandleStickData>>(data.Result);
             var result = RequestHelper.CloneWithNewResult(data, mapData);
             return result;

@@ -1,5 +1,6 @@
 ﻿using CryptoCurrencies.Common.ViewModel;
 using DevExpress.Xpf.Core;
+using System.ComponentModel;
 using System.Windows;
 
 namespace CryptoCurrencies.Common.View.Content
@@ -23,7 +24,10 @@ namespace CryptoCurrencies.Common.View.Content
 
         private async void Control_Loaded(object sender, RoutedEventArgs e)
         {
-            await ViewModel.ViewLoadedAsync();
+            if(!DesignerProperties.GetIsInDesignMode(this))
+            {
+                await ViewModel.ViewLoadedAsync();
+            }
             Loaded -= Control_Loaded;
         }
     }
