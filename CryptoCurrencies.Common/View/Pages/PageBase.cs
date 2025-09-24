@@ -1,5 +1,4 @@
-﻿using CryptoCurrencies.Common.Commands;
-using CryptoCurrencies.Common.Services;
+﻿using CryptoCurrencies.Common.Services;
 using CryptoCurrencies.Common.ViewModel;
 using DevExpress.Xpf.Core;
 using System;

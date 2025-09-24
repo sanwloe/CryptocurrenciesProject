@@ -1,5 +1,4 @@
-﻿using CryptoCurrencies.Common.Commands;
-using CryptoCurrencies.Common.View.Content;
+﻿using CryptoCurrencies.Common.View.Content;
 using System;
 using System.Collections.Generic;
 using System.Linq;

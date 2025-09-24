@@ -15,14 +15,13 @@ namespace CryptocurrenciesProject
             Current.Resources.MergedDictionaries.Add(
             new ResourceDictionary
             {
-                Source = new Uri("pack://application:,,,/CryptoCurrencies.Common;component/Themes/DX/Generic.xaml")
+                Source = new Uri("pack://application:,,,/CryptoCurrencies.Common;component/Themes/Generic.xaml")
             });
 
             base.OnStartup(e);
             var mainWindow = new MainWindow();
             MainWindow = mainWindow;
             MainWindow.Show();
-            
         }
     }
 }

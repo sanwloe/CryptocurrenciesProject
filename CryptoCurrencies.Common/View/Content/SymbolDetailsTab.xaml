@@ -8,44 +8,139 @@
              xmlns:viewmodels="clr-namespace:CryptoCurrencies.Common.ViewModel"
              xmlns:modeldata="clr-namespace:CryptoCurrencies.Common.Model"
              xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
-             xmlns:i="http://schemas.microsoft.com/xaml/behaviors" x:TypeArguments="modeldata:SymbolDetailsModel" xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts" x:Class="CryptoCurrencies.Common.View.Content.SymbolDetailsTab"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors" 
+             x:TypeArguments="modeldata:SymbolDetailsModel" 
+             xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts" 
+             x:Class="CryptoCurrencies.Common.View.Content.SymbolDetailsTab"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
+             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
              >
 
-    <local:ContentControlBase.Resources>
+    <UserControl.Resources>
         <xamlExt:DISource Type="{x:Type viewmodels:SymbolDetailsViewModel}" x:Key="vm"/>
-    </local:ContentControlBase.Resources>
-    <local:ContentControlBase.DataContext>
+    </UserControl.Resources>
+    <UserControl.DataContext>
         <Binding Source="{StaticResource vm}"/>
-    </local:ContentControlBase.DataContext>
+    </UserControl.DataContext>
+    <Grid xamlExt:ScrollViewerExt.BlockScrollOverElement="{Binding ElementName=chartControl}">
+        <ScrollViewer x:Name="rootView">
+            <VirtualizingStackPanel Orientation="Vertical">
+                <dxc:ChartControl
+                    x:Name="chartControl"
+                    IsDirectXSurfaceRendering="True"
+                    Height="{DXBinding '@e(rootView).ActualHeight * 0.66'}">
+                    <dxc:ChartControl.ToolTipOptions>
+                        <dxc:ToolTipOptions />
+                    </dxc:ChartControl.ToolTipOptions>
+                    <dxc:ChartControl.Diagram>
+                        <dxc:XYDiagram2D 
+                            EnableAxisXNavigation="True"
+                            DependentAxesYRange="True"
+                            BorderThickness="0"
+                            x:Name="Diagram">
+                            <dxc:XYDiagram2D.AxisX>
+                                <dxc:AxisX2D x:Name="mainAxisX">
+                                    <dxc:AxisX2D.DateTimeScaleOptions>
+                                        <dxc:ManualDateTimeScaleOptions
+                                            AggregateFunction="None"
+                                            MeasureUnit="{Binding Model.SelectedChartInterval.MeasureUnit}"
+                                            MeasureUnitMultiplier="{Binding Model.SelectedChartInterval.MeasureUnitMultiplier}"
+                                            SkipRangesWithoutPoints="True"
+                                            />
+                                    </dxc:AxisX2D.DateTimeScaleOptions>
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+                                    <dxc:AxisX2D.Label>
+                                        <dxc:AxisLabel Visible="True" TextPattern="{}{0:dd/MM/yyyy}"/>
+                                    </dxc:AxisX2D.Label>
 
-        <Grid Grid.Row="0">
+                                    <dxc:AxisX2D.WholeRange>
+                                        <dxc:Range  AutoSideMargins="False" />
+                                    </dxc:AxisX2D.WholeRange>
 
-            
+                                    <dxc:AxisX2D.VisualRange>
+                                        <dxc:Range 
+                                            MinValue="{Binding Model.MinDateTimeVisualRange}" 
+                                            MaxValue="{Binding Model.MaxDateTimeVisualRange}"/>
+                                    </dxc:AxisX2D.VisualRange>
+                                </dxc:AxisX2D>
+                            </dxc:XYDiagram2D.AxisX>
 
-        </Grid>
+                            <dxc:XYDiagram2D.AxisY>
+                                <dxc:AxisY2D Interlaced="False" Visible="True" Alignment="Far">
+                                    <dxc:AxisY2D.WholeRange>
+                                        <dxc:Range
+                                            SideMarginSizeUnit="AxisRangePercentage"
+                                            EndSideMargin="40"/>
+                                    </dxc:AxisY2D.WholeRange>
+                                    <dxc:AxisY2D.VisualRange>
+                                        <dxc:Range
+                                            dxc:AxisY2D.AlwaysShowZeroLevel="False" 
+                                            MinValue="{Binding Model.MinPriceVisualRange}"
+                                            MaxValue="{Binding Model.MaxPriceVisualRange}"
+                                        />
+                                    </dxc:AxisY2D.VisualRange>
+                                </dxc:AxisY2D>
+                            </dxc:XYDiagram2D.AxisY>
 
-        <Grid Grid.Row="1">
-            <dxg:GridControl x:Name="gridControlMarkets" ItemsSource="{Binding Model.Markets}">
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="PreviewMouseDoubleClick">
-                        <i:InvokeCommandAction Command="{Binding OpenExchangeCommand}" CommandParameter="{Binding SelectedItem, ElementName=gridControlMarkets}"/>
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
-                <dxg:GridControl.View>
-                    <dxg:TableView ShowVerticalLines="False" EnableSelectedRowAppearance="False"/>
-                </dxg:GridControl.View>
-                <dxg:GridColumn Header="Exchange" FieldName="MarketName"/>
-                <dxg:GridColumn Width="auto" Header="Price (USD)" FieldName="Price"/>
-                <dxg:GridColumn Width="*" Header="Currency" FieldName="PriceCurrency"/>
-            </dxg:GridControl>
-        </Grid>
+                            <dxc:XYDiagram2D.DefaultPane>
+                                <dxc:Pane x:Name="defaultPane" dxc:GridLayout.RowSpan="3" DomainBorderBrush="Transparent">
+                                    <dxc:Pane.AxisXScrollBarOptions>
+                                        <dxc:ScrollBarOptions Visible="False"/>
+                                    </dxc:Pane.AxisXScrollBarOptions>
+                                </dxc:Pane>
+                            </dxc:XYDiagram2D.DefaultPane>
+
+                            <dxmvvm:Interaction.Behaviors>
+                                <dxmvvm:EventToCommand EventName="Scroll" Command="{Binding ChartHorizontalScrollCommand}" PassEventArgsToCommand="True"/>
+                                <dxmvvm:EventToCommand EventName="Zoom" Command="{Binding ChartZoomCommand}" PassEventArgsToCommand="True"/>
+                            </dxmvvm:Interaction.Behaviors>
+
+                            <dxc:CandleStickSeries2D
+                                DataSource="{Binding Model.CandleStickData}"
+                                ArgumentScaleType="DateTime"
+                                ArgumentDataMember="OpenTime"
+                                OpenValueDataMember="OpenPrice"
+                                CloseValueDataMember="ClosePrice"
+                                HighValueDataMember="HighPrice"
+                                LowValueDataMember="LowPrice"
+                
+                                Brush="Green"
+                                LabelsVisibility="False"
+                                DisplayName="{Binding Model.SymbolData.Symbol}">
+
+                                <dxc:CandleStickSeries2D.ReductionOptions>
+                                    <dxc:ReductionStockOptions
+                                        ColorMode="OpenToCloseValue"
+                                        dxc:CandleStickSeries2D.FillMode="AlwaysFilled"
+                                        Level="CloseValue"
+                                        Brush="Red"
+                                        Enabled="True"/>
+                                </dxc:CandleStickSeries2D.ReductionOptions>
+
+                                <dxc:CandleStickSeries2D.Model>
+                                    <dxc:ThinCandleStick2DModel/>
+                                </dxc:CandleStickSeries2D.Model>
+                            </dxc:CandleStickSeries2D>
+                        </dxc:XYDiagram2D>
+                    </dxc:ChartControl.Diagram>
+                </dxc:ChartControl>
+
+                <ListView x:Name="listViewMarkets" ItemsSource="{Binding Model.Markets}" Height="{DXBinding '@e(rootView).ActualHeight'}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="PreviewMouseDoubleClick">
+                            <i:InvokeCommandAction Command="{Binding OpenExchangeCommand}" CommandParameter="{Binding SelectedItem, ElementName=listViewMarkets}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Width="150" DisplayMemberBinding="{Binding MarketName}"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Price}"/>
+                            <GridViewColumn Width="300" DisplayMemberBinding="{Binding PriceCurrency}"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </VirtualizingStackPanel>
+        </ScrollViewer>
     </Grid>
 </local:ContentControlBase>

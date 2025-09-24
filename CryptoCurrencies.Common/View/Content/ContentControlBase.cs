@@ -1,17 +1,6 @@
-﻿using CryptoCurrencies.Common.Commands;
-using CryptoCurrencies.Common.Model;
-using CryptoCurrencies.Common.View.Pages;
-using CryptoCurrencies.Common.ViewModel;
-using DevExpress.Mvvm;
+﻿using CryptoCurrencies.Common.ViewModel;
 using DevExpress.Xpf.Core;
-using DevExpress.Xpf.Core.Native;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 
 namespace CryptoCurrencies.Common.View.Content
 {

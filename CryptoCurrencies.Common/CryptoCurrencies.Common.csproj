@@ -8,13 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="View\Abstract\" />
     <Folder Include="View\Controls\" />
     <Folder Include="View\Windows\" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+    <PackageReference Include="DevExpress.Win.Design" Version="23.2.5" />
     <PackageReference Include="devexpress.wpf.charts" Version="23.2.5" />
     <PackageReference Include="devexpress.wpf.grid.core" Version="23.2.5" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.9" />
@@ -27,7 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Page Update="Themes\DX\Generic.xaml">
+    <Page Update="Themes\Generic.xaml">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Page>
   </ItemGroup>

@@ -5,6 +5,4 @@
         <Setter Property="NavigationUIVisibility" Value="Hidden"/>
     </Style>
     
-    
-    
 </ResourceDictionary>

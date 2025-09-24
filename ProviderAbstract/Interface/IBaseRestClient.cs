@@ -1,4 +1,6 @@
-﻿using DataModels.Models;
+﻿using CryptoCurrencies.Common.Model;
+using DataModels.Enums;
+using DataModels.Models;
 using ProviderAbstract.Classes;
 using System;
 using System.Collections.Generic;
@@ -12,5 +14,6 @@ namespace ProviderAbstract.Interface
     {
         Task<RequestResult<IEnumerable<SymbolData>>> GetSymbols();
         Task<RequestResult<IEnumerable<MarketData>>> GetMarketsBySymbol(string symbol);
+        Task<RequestResult<IEnumerable<CandleStickData>>> GetCandleStickChartData(string symbol,TimeInterval interval,DateTime? start,DateTime? end);
     }
 }

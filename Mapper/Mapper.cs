@@ -24,12 +24,17 @@ namespace Mapper
         {
             CreateMap<decimal,decimal>().ReverseMap().ConvertUsing(v => NormalizeDecimal(v));
             CreateMap<string, int>().ConvertUsing(v => Convert.ToInt32(v));
+            CreateMap<long,DateTime>().ConvertUsing(v => GetTimeFromUnix(v));
             CreateMap<BinanceFuturesTicker, SymbolData>();
             CreateMap<CoinCapSymbolData, SymbolData>();
         }
         private decimal NormalizeDecimal(decimal value)
         {
             return value / 1.000000000000000000000000m;
+        }
+        private DateTime GetTimeFromUnix(long milliseconds)
+        {
+            return DateTimeOffset.FromUnixTimeMilliseconds(milliseconds).LocalDateTime;
         }
     }
 }
