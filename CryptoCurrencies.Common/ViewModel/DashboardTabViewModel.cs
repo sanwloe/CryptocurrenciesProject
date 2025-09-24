@@ -23,7 +23,7 @@ namespace CryptoCurrencies.Common.ViewModel
         {
             _factory = restClientFactory;
             ShowTabDetailsCommand = new(ShowTabDetails!);
-            Model.Symbols.Add(new DataModels.Models.SymbolData() { Symbol = "1" });
+            //Model.Symbols.Add(new DataModels.Models.SymbolData() { Symbol = "1" });
         }
         public RelayCommand<DataModels.Models.SymbolData> ShowTabDetailsCommand { get; set; } = null!;
         internal protected override async Task ViewLoadedAsync()
@@ -32,11 +32,15 @@ namespace CryptoCurrencies.Common.ViewModel
         }
         private async Task LoadDataAsync()
         {
-            var client = _factory.GetRestClient(DataModels.Enums.ExchangeType.CoinCap);
+            var client = _factory.GetRestClient(DataModels.Enums.ExchangeType.BinanceFutures);
             var data = await client.GetSymbols();
             if (data.IsSuccess) 
             {
                 Model.Symbols = new ObservableCollection<DataModels.Models.SymbolData>(data.Result.OrderBy(x => x.Symbol));
+            }
+            else
+            {
+                MessageBox.Show(data.ErrorMessage);
             }
         }
         private void ShowTabDetails(DataModels.Models.SymbolData data)

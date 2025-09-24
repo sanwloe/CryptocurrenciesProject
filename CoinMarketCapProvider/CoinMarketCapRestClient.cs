@@ -1,4 +1,6 @@
-﻿using DataModels.Models;
+﻿using CryptoCurrencies.Common.Model;
+using DataModels.Enums;
+using DataModels.Models;
 using Newtonsoft.Json;
 using ProviderAbstract.Classes;
 using ProviderAbstract.Helpers;
@@ -31,8 +33,11 @@ namespace CoinMarketCapProvider
             var result = await RequestHelper.GetResultFromResponse<IEnumerable<SymbolData>>(response);
             return result;
         }
-
         public Task<RequestResult<IEnumerable<MarketData>>> GetMarketsBySymbol(string symbol)
+        {
+            throw new NotImplementedException();
+        }
+        public Task<RequestResult<IEnumerable<CandleStickData>>> GetCandleStickChartData(string symbol, TimeInterval interval, DateTime? start, DateTime? end)
         {
             throw new NotImplementedException();
         }

@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BinanceProvider;
+﻿using BinanceProvider.RestApi;
 using CoinCapProvider.RestApi;
-using CoinMarketCapProvider;
 using DataModels.Enums;
 using ProviderAbstract.Interface;
 

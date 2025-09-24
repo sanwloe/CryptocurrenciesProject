@@ -17,10 +17,7 @@ namespace CoinGeckoProvider.RestApi
             _httpClient = new HttpClient();
             _httpClient.BaseAddress = new Uri(BaseAdress);
         }
-        public async Task Check()
-        {
-
-        }
+        
 
     }
 }
