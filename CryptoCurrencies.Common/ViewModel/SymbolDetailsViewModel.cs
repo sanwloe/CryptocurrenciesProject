@@ -1,10 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.Input;
-using CryptoCurrencies.Common.Data;
-using CryptoCurrencies.Common.Helpers;
 using CryptoCurrencies.Common.Model;
-using DataModels.Enums;
 using DataModels.Models;
-using DevExpress.Diagram.Core.Shapes;
 using DevExpress.Xpf.Charts;
 using ProviderAbstract.Interface;
 using ProvidersFactory;

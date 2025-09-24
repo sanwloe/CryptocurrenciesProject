@@ -1,12 +1,4 @@
-﻿using DataModels.Converters;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CryptoCurrencies.Common.Model
+﻿namespace CryptoCurrencies.Common.Model
 {
     public class CandleStickData
     {

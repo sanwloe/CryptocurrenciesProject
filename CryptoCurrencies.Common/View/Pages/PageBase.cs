@@ -1,11 +1,5 @@
-﻿using CryptoCurrencies.Common.Services;
-using CryptoCurrencies.Common.ViewModel;
+﻿using CryptoCurrencies.Common.ViewModel;
 using DevExpress.Xpf.Core;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 

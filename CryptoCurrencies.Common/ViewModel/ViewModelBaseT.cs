@@ -1,11 +1,5 @@
-﻿using CommunityToolkit.Mvvm.Input;
-using CryptoCurrencies.Common.Services;
+﻿using CryptoCurrencies.Common.Services;
 using DevExpress.Mvvm;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Threading;
 
 namespace CryptoCurrencies.Common.ViewModel

@@ -1,21 +1,15 @@
 ﻿using AutoMapper;
-using DataModels.Enums;
 using ProviderAbstract.Classes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ProviderAbstract.Helpers
 {
     public static class MapperHelper
     {
-        private static Dictionary<ExchangeType, IMapper> Mappers = [];
+        private static Dictionary<string, IMapper> Mappers = [];
 
-        public static IMapper GetMapper<TProfile>(ExchangeType exchangeType) where TProfile : MapperProfileBase, new()
+        public static IMapper GetMapper<TProfile>() where TProfile : MapperProfileBase, new()
         {
-            if (Mappers.TryGetValue(exchangeType, out var mapper))
+            if (Mappers.TryGetValue(typeof(TProfile).Name, out var mapper))
             {
                 return mapper;
             }
@@ -32,7 +26,7 @@ namespace ProviderAbstract.Helpers
                     return config.CreateMapper();
                 });
 
-                return Mappers[exchangeType] = newMapper.Value;
+                return Mappers[typeof(TProfile).Name] = newMapper.Value;
             }
         }
     }
