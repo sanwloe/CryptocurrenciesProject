@@ -1,8 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using CryptoCurrencies.Common.Model;
 using CryptoCurrencies.Common.View.Content;
+using DataModels.Models;
 using ProvidersFactory;
-using System.Collections.ObjectModel;
 
 namespace CryptoCurrencies.Common.ViewModel
 {
@@ -12,6 +12,18 @@ namespace CryptoCurrencies.Common.ViewModel
         public DashboardTabViewModel()
         {
             
+        }
+        protected internal override void Initialize()
+        {
+            base.Initialize();
+            Model.PropertyChanged += Model_PropertyChanged;
+        }
+        private void Model_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if(e.PropertyName == nameof(Model.TextFilter))
+            {
+                ApplyFilter();
+            }
         }
         public DashboardTabViewModel(RestClientFactory restClientFactory)
         {
@@ -30,7 +42,7 @@ namespace CryptoCurrencies.Common.ViewModel
             var data = await client.GetSymbols();
             if (data.IsSuccess) 
             {
-                Model.Symbols = new ObservableCollection<DataModels.Models.SymbolData>(data.Result.OrderBy(x => x.Symbol));
+                Model.Symbols = new(data.Result.OrderBy(x => x.Symbol).ToList());
             }
             else
             {
@@ -42,6 +54,21 @@ namespace CryptoCurrencies.Common.ViewModel
             var newTab = new SymbolDetailsTab();
             newTab.ViewModel.Model.SymbolData = data;
             this.TabNavigationService.ShowTab(newTab,$"Details - {data.Symbol}");
+        }
+        private void ApplyFilter()
+        {
+            if(string.IsNullOrEmpty(Model.TextFilter))
+            {
+                Model.Symbols.Refresh();
+            }
+            else
+            {
+                Model.Symbols.Sort((data) =>
+                {
+                    return data.Symbol.Contains(Model.TextFilter,StringComparison.InvariantCultureIgnoreCase) 
+                    || data.Symbol.Contains(Model.TextFilter,StringComparison.InvariantCultureIgnoreCase);
+                });         
+            }
         }
     }
 }

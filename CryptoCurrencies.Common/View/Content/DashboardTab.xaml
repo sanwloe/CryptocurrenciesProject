@@ -23,16 +23,21 @@
     </UserControl.DataContext>
 
     <Grid>
-        <dxg:GridControl x:Name="gridControl" ItemsSource="{Binding Model.Symbols}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBox Margin="10" Text="{Binding Model.TextFilter,UpdateSourceTrigger=PropertyChanged}"/>
+
+        <dxg:GridControl Grid.Row="1" x:Name="gridControl" ItemsSource="{Binding Model.Symbols}">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="PreviewMouseDoubleClick">
                     <i:InvokeCommandAction Command="{Binding ShowTabDetailsCommand}" CommandParameter="{Binding SelectedItem,ElementName=gridControl}"/>
                 </i:EventTrigger>
             </i:Interaction.Triggers>
             <dxg:GridControl.View>
-                <dxg:TableView ShowVerticalLines="False" EnableSelectedRowAppearance="False">
-
-                </dxg:TableView>
+                <dxg:TableView/>
             </dxg:GridControl.View>
 
             <dxg:GridControl.Columns>
