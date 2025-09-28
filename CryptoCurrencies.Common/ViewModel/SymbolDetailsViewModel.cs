@@ -170,8 +170,25 @@ namespace CryptoCurrencies.Common.ViewModel
             var count = Model.CandleStickData.Count;
             Model.MaxDateTimeVisualRange = Model.CandleStickData[count - 1].OpenTime;
             Model.MinDateTimeVisualRange = Model.CandleStickData[count - 100].OpenTime;
-            Model.MaxPriceVisualRange = Model.CandleStickData[count - 1].HighPrice;
-            Model.MinPriceVisualRange = Model.CandleStickData[count - 100].LowPrice;
+
+            var maxPrice = 0m;
+            var minPrice = 0m;
+
+            for (int i = Model.CandleStickData.Count - 1; i > Model.CandleStickData.Count - 100; i--)
+            {
+                var element = Model.CandleStickData[i];
+                if (element.HighPrice > maxPrice)
+                {
+                    maxPrice = element.HighPrice;
+                }
+                if(element.LowPrice < minPrice || minPrice == 0)
+                {
+                    minPrice = element.LowPrice;
+                }
+            }
+
+            Model.MaxPriceVisualRange = maxPrice;
+            Model.MinPriceVisualRange = minPrice;
         }
     }
 }

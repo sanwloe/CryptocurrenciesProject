@@ -3,10 +3,4 @@
                     xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid">
 
 
-    <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="/Themes/Frames.xaml"/>
-    </ResourceDictionary.MergedDictionaries>
-
-    
-
 </ResourceDictionary>
