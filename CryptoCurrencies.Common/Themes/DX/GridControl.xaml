@@ -8,6 +8,10 @@
         <Setter Property="ShowIndicator" Value="False"/>
         <Setter Property="VerticalScrollbarVisibility" Value="Auto"/>
         <Setter Property="AllowEditing" Value="False"/>
+        <Setter Property="ShowVerticalLines" Value="False"/>
+        <Setter Property="EnableSelectedRowAppearance" Value="False"/>
+        <Setter Property="ShowColumnHeaders" Value="False"/>
+        
         <Setter Property="ColumnHeaderStyle">
             <Setter.Value>
                 <Style TargetType="dxg:GridColumnHeader">
@@ -25,7 +29,7 @@
     </Style>
     <Style TargetType="dxg:GridControl">
         <Setter Property="ShowBorder" Value="False"/>
-        <Setter Property="Margin" Value="2 0 0 10"/>
+        <Setter Property="Margin" Value="2 2 2 10"/>
         <Setter Property="SelectionMode" Value="Row"/>
     </Style>
 

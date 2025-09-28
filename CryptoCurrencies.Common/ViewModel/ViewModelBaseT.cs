@@ -9,8 +9,10 @@ namespace CryptoCurrencies.Common.ViewModel
         protected ViewModelBaseT() : base()
         {
             Model = new T();
+            Initialize();
         }
         public new T Model { get => GetValue<T>(); set => SetValue(value); }
+        internal protected virtual void Initialize() { }
     }
     public abstract class BaseViewModel : ViewModelBase
     {

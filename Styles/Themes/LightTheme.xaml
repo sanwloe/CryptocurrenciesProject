@@ -1,8 +1,9 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <Style x:Key="mainFrameStyle" TargetType="Frame">
-        <Setter Property="NavigationUIVisibility" Value="Hidden"/>
-    </Style>
-    
+
+    <SolidColorBrush Color="White" x:Key="controlBackground"/>
+    <SolidColorBrush Color="White" x:Key="rowsBackground"/>
+    <SolidColorBrush Color="Black" x:Key="textColor"/>
+
 </ResourceDictionary>

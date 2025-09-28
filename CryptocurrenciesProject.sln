@@ -27,6 +27,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoinGeckoProvider", "CoinGe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoinCapProvider", "CoinCapProvider\CoinCapProvider.csproj", "{E2F3FEB0-10D0-4CB0-A389-976FDC774163}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Styles", "Styles\Styles.csproj", "{A8AC8030-72B9-4833-B2CB-22799F0CC621}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +71,10 @@ Global
 		{E2F3FEB0-10D0-4CB0-A389-976FDC774163}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E2F3FEB0-10D0-4CB0-A389-976FDC774163}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E2F3FEB0-10D0-4CB0-A389-976FDC774163}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8AC8030-72B9-4833-B2CB-22799F0CC621}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8AC8030-72B9-4833-B2CB-22799F0CC621}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8AC8030-72B9-4833-B2CB-22799F0CC621}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8AC8030-72B9-4833-B2CB-22799F0CC621}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -82,6 +88,7 @@ Global
 		{649B0748-62DC-43FC-9674-356C5DEAD37F} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{43F4F3F4-C20E-4103-956D-B0048B24D65E} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{E2F3FEB0-10D0-4CB0-A389-976FDC774163} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{A8AC8030-72B9-4833-B2CB-22799F0CC621} = {B7C10F9A-3E4E-4963-8004-81B5BEDDE639}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3E2958CE-1C2F-46D5-99E8-270F9DF27CBE}
