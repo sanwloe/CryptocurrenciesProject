@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using CryptoCurrencies.Common.Model;
+using CryptoCurrencies.Common.View.Content;
 using ProvidersFactory;
 
 namespace CryptoCurrencies.Common.ViewModel
@@ -49,9 +50,9 @@ namespace CryptoCurrencies.Common.ViewModel
         }
         private void ShowTabDetails(DataModels.Models.SymbolData data)
         {
-            //var newTab = new SymbolDetailsTab();
-            //newTab.ViewModel.Model.SymbolData = data;
-            //this.TabNavigationService.ShowTab(newTab,$"Details - {data.Symbol}");
+            var newTab = new SymbolDetailsTab();
+            newTab.ViewModel.Model.SymbolData = data;
+            this.TabNavigationService.ShowTab(newTab, $"Details - {data.Symbol}");
         }
         private void ApplyFilter()
         {
