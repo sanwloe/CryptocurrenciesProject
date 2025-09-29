@@ -11,16 +11,16 @@ namespace CryptoCurrencies.Common.ViewModel
 {
     public class SymbolDetailsViewModel : ViewModelBaseT<SymbolDetailsModel>
     {
-        private readonly RestClientFactory _restClientFactory;
+        private readonly ProviderFactory _restClientFactory;
         private readonly IBaseRestClient _restClient;
 
         public RelayCommand<MarketData> OpenExchangeCommand { get; set; }
         public AsyncRelayCommand<XYDiagram2DScrollEventArgs> ChartHorizontalScrollCommand { get; set; }
         public RelayCommand<XYDiagram2DZoomEventArgs> ChartZoomCommand { get; set; }
-        public SymbolDetailsViewModel(RestClientFactory restClientFactory)
+        public SymbolDetailsViewModel(ProviderFactory restClientFactory)
         {
             _restClientFactory = restClientFactory;
-            _restClient = restClientFactory.GetRestClient(DataModels.Enums.ExchangeType.BinanceFutures);
+            _restClient = restClientFactory.GetProvider(DataModels.Enums.ExchangeType.BinanceFutures);
 
             OpenExchangeCommand = new RelayCommand<MarketData>(TryOpenExchange!);
             ChartHorizontalScrollCommand = new AsyncRelayCommand<XYDiagram2DScrollEventArgs>(ChartHorizontalScroll!);
@@ -49,7 +49,7 @@ namespace CryptoCurrencies.Common.ViewModel
         }
         private async Task<IEnumerable<MarketData>> GetMarketsAsync()
         {
-            var result = await _restClient.GetMarketsBySymbol(Model.SymbolData.Name);
+            var result = await _restClient.GetMarketsBySymbolAsync(Model.SymbolData.Name);
             if (result.IsSuccess) 
             {
                 return result.Result;
@@ -148,7 +148,7 @@ namespace CryptoCurrencies.Common.ViewModel
         }
         private async Task<IEnumerable<CandleStickData>> GetChartDataAsync(DateTime? start,DateTime? end )
         {
-            var result = await _restClient.GetCandleStickChartData(
+            var result = await _restClient.GetCandleStickChartDataAsync(
                 Model.SymbolData.Name
                 , Model.SelectedChartInterval.Interval
                 , start

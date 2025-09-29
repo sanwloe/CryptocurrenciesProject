@@ -24,7 +24,7 @@ namespace BinanceProvider.RestApi
             _httpClient = new();
             _httpClient.BaseAddress = new Uri(BaseAdress);
         }
-        public async Task<RequestResult<IEnumerable<SymbolData>>> GetSymbols()
+        public async Task<RequestResult<IEnumerable<SymbolData>>> GetSymbolsAsync()
         {
             var response = await _httpClient.GetAsync(SymbolsEndPoint);
             var data = await RequestHelper.GetResultFromResponse<IEnumerable<BinanceFuturesTicker>>(response);
@@ -37,14 +37,14 @@ namespace BinanceProvider.RestApi
             }
             return result;
         }
-        public Task<RequestResult<IEnumerable<MarketData>>> GetMarketsBySymbol(string symbol)
+        public Task<RequestResult<IEnumerable<MarketData>>> GetMarketsBySymbolAsync(string symbol)
         {
             return Task.FromResult(new RequestResult<IEnumerable<MarketData>>()
             {
                 ErrorMessage = "Don`t available"
             });
         }
-        public async Task<RequestResult<IEnumerable<CandleStickData>>> GetCandleStickChartData(string symbol, TimeInterval interval, DateTime? start, DateTime? end)
+        public async Task<RequestResult<IEnumerable<CandleStickData>>> GetCandleStickChartDataAsync(string symbol, TimeInterval interval, DateTime? start, DateTime? end)
         {
             var stringInterval = IntervalHelper.GetStringInterval(interval);
             var time = TimeHelper.Calc(start, end,interval);

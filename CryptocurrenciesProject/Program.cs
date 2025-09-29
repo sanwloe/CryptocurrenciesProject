@@ -16,7 +16,7 @@ namespace CryptocurrenciesProject
             hostBuilder.ConfigureServices(services => 
             {
                 services.AddSingleton<App>();
-                services.AddSingleton<RestClientFactory>();
+                services.AddSingleton<ProviderFactory>();
             });
             var host = AppHost = hostBuilder.Build();
             var app = AppHost.Services.GetService<App>();

@@ -1,14 +1,12 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using CryptoCurrencies.Common.Model;
-using CryptoCurrencies.Common.View.Content;
-using DataModels.Models;
 using ProvidersFactory;
 
 namespace CryptoCurrencies.Common.ViewModel
 {
     public class DashboardTabViewModel : ViewModelBaseT<DashboardTabModel>
     {
-        private readonly RestClientFactory _factory = null!;
+        private readonly ProviderFactory _factory = null!;
         public DashboardTabViewModel()
         {
             
@@ -25,7 +23,7 @@ namespace CryptoCurrencies.Common.ViewModel
                 ApplyFilter();
             }
         }
-        public DashboardTabViewModel(RestClientFactory restClientFactory)
+        public DashboardTabViewModel(ProviderFactory restClientFactory)
         {
             _factory = restClientFactory;
             ShowTabDetailsCommand = new(ShowTabDetails!);
@@ -38,8 +36,8 @@ namespace CryptoCurrencies.Common.ViewModel
         }
         private async Task LoadDataAsync()
         {
-            var client = _factory.GetRestClient(DataModels.Enums.ExchangeType.BinanceFutures);
-            var data = await client.GetSymbols();
+            var client = _factory.GetProvider(DataModels.Enums.ExchangeType.BinanceFutures);
+            var data = await client.GetSymbolsAsync();
             if (data.IsSuccess) 
             {
                 Model.Symbols = new(data.Result.OrderBy(x => x.Symbol).ToList());
@@ -51,9 +49,9 @@ namespace CryptoCurrencies.Common.ViewModel
         }
         private void ShowTabDetails(DataModels.Models.SymbolData data)
         {
-            var newTab = new SymbolDetailsTab();
-            newTab.ViewModel.Model.SymbolData = data;
-            this.TabNavigationService.ShowTab(newTab,$"Details - {data.Symbol}");
+            //var newTab = new SymbolDetailsTab();
+            //newTab.ViewModel.Model.SymbolData = data;
+            //this.TabNavigationService.ShowTab(newTab,$"Details - {data.Symbol}");
         }
         private void ApplyFilter()
         {

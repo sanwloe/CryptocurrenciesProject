@@ -17,11 +17,10 @@ namespace CryptoCurrencies.Common.View.Content
         }
         public DXTabControl DXTabOwner { get => (DXTabControl)GetValue(DXTabOwnerProperty); set => SetValue(DXTabOwnerProperty, value); }
         public ViewModelBaseT<TDataModel> ViewModel { get => (ViewModelBaseT<TDataModel>)DataContext; }
-        protected ContentControlBase()
+        public ContentControlBase()
         {
             Loaded += Control_Loaded;
         }
-
         private async void Control_Loaded(object sender, RoutedEventArgs e)
         {
             if(!DesignerProperties.GetIsInDesignMode(this))

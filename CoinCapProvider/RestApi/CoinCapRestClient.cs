@@ -28,7 +28,7 @@ namespace CoinCapProvider.RestApi
             _httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + ApiKey);
             _httpClient.DefaultRequestHeaders.Add("accept", "application/json");
         }
-        public async Task<RequestResult<IEnumerable<SymbolData>>> GetSymbols()
+        public async Task<RequestResult<IEnumerable<SymbolData>>> GetSymbolsAsync()
         {
             var response = await _httpClient.GetAsync(SymbolsEndPoint);
             var data = await RequestHelper.GetResultFromResponse<IEnumerable<CoinCapSymbolData>>(response);
@@ -41,7 +41,7 @@ namespace CoinCapProvider.RestApi
             }
             return clone;
         }
-        public async Task<RequestResult<IEnumerable<MarketData>>> GetMarketsBySymbol(string symbol)
+        public async Task<RequestResult<IEnumerable<MarketData>>> GetMarketsBySymbolAsync(string symbol)
         {
             var response = await _httpClient.GetAsync(RequestHelper.GetEndPointWithParameters(MarketsEndPoint,
                 new Dictionary<string, string>()
@@ -52,7 +52,7 @@ namespace CoinCapProvider.RestApi
             return data;
         }
 
-        public async Task<RequestResult<IEnumerable<CandleStickData>>> GetCandleStickChartData(string symbol,TimeInterval interval,DateTime? start, DateTime? end)
+        public async Task<RequestResult<IEnumerable<CandleStickData>>> GetCandleStickChartDataAsync(string symbol,TimeInterval interval,DateTime? start, DateTime? end)
         {
             var stringInterval = new string(IntervalHelper.GetStringInterval(interval).Reverse().ToArray());
             var time = TimeHelper.Calc(start, end,interval);
